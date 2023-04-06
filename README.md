@@ -1,8 +1,3 @@
-# poker-calculator
-Calculate a hand's chance of winning, plus more!
-
-
-## Source Files
-
--
+# blackjack
+An app to play Blackjack, that simple really.
 
