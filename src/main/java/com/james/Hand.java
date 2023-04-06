@@ -24,7 +24,7 @@ public class Hand {
     for (Card card : cards) {
       int cardValue = card.rankToValue();
       value += cardValue;
-      if (cardValue == 1) {
+      if (cardValue == 11) {
         aces++;
       }
       while (value > 21 && aces > 0) {
