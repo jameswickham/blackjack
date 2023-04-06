@@ -28,11 +28,11 @@ ext {
 
   delombokTargetDir = new File("${project.projectDir}/src/main/generated")
 
-  componentName='Poker Calculator'
-  componentDesc="Calculate a hand's chance of winning, plus more"
+  componentName='blackjack'
+  componentDesc="A Blackjack app"
 
   organizationName = "James Ltd"
-  organizationUrl = "http://poker-calculator.james.com"
+  organizationUrl = "http://blackjack.james.com"
   slf4jVersion = '1.7.35'
   tikaVersion = "2.2.1"
   mockitoVersion = '4.3.1'
@@ -249,12 +249,12 @@ publishing {
       pom.withXml {
         asNode().appendNode("name", componentName)
         asNode().appendNode("description", componentDesc)
-		asNode().appendNode("url", "https://github.com/jameswickham/poker-calculato/docs")
+		asNode().appendNode("url", "https://github.com/jameswickham/blackjack/docs")
         def properties = asNode().appendNode("properties")
         properties.appendNode("target", "3.6.6+")
         properties.appendNode("tags", "filesystem")
         properties.appendNode("license", "false")
-        properties.appendNode("repository", "https://github.com/jameswickham/poker-calculator")
+        properties.appendNode("repository", "https://github.com/jameswickham/blackjack")
       }
     }
   }
