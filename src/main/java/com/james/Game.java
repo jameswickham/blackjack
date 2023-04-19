@@ -26,7 +26,7 @@ public class Game {
     displayBlackJackRules();
     int numOfPlayers = inputNumOfPlayers(sc);
     initialisePlayers(numOfPlayers, sc);
-    
+
     boolean keepPlaying = true;
     while (keepPlaying) {
       placeBets(playerList, sc);
@@ -36,6 +36,7 @@ public class Game {
       displayPlayersWallet(playerList);
       clearHands(playerList);
       sc.nextLine();
+      keepPlaying = continuePlaying(sc);
     }
     sc.close();
   }
@@ -48,12 +49,15 @@ public class Game {
     System.out.println("The game of Blackjack");
     System.out.println("");
     System.out.println("  BLACKJACK RULES: ");
-    System.out.println("    -Each player is dealt 2 cards. The dealer is dealt 2 cards with one face-up and one face-down.");
+    System.out
+        .println("    -Each player is dealt 2 cards. The dealer is dealt 2 cards with one face-up and one face-down.");
     System.out.println("    -Cards are equal to their value with face cards being 10 and an Ace being 1 or 11.");
     System.out.println("    -The players cards are added up for their total.");
-    System.out.println("    -Players “Hit” to get another card from the deck. Players “Stick” if they wish to keep their current card total.");
+    System.out.println(
+        "    -Players “Hit” to get another card from the deck. Players “Stick” if they wish to keep their current card total.");
     System.out.println("    -Dealer “Hits” until they equal or exceed 17.");
-    System.out.println("    -The goal is to have a higher card total than the dealer without exceeding 21(going bust!).");
+    System.out
+        .println("    -The goal is to have a higher card total than the dealer without exceeding 21(going bust!).");
     System.out.println("    -Players win if they beat the dealer");
     System.out.println("");
   }
@@ -109,7 +113,8 @@ public class Game {
 
   public void settleBets(List<Player> playerList, int dealersResult) {
     for (Player player : playerList) {
-      if ((player.getHand().checkRank() > 21) || (player.getHand().checkRank() < dealersResult && dealersResult <= 21)) {
+      if ((player.getHand().checkRank() > 21)
+          || (player.getHand().checkRank() < dealersResult && dealersResult <= 21)) {
         int reduceWallet = player.getPlayerWallet() - player.getPlayerBet();
         player.setPlayerWallet(reduceWallet);
         System.out.println(String.format(LOOSE_MESSAGE, player.getPlayerName()));
@@ -126,7 +131,7 @@ public class Game {
       System.out.println(String.format(WALLET_BALANCE_MESSAGE, player.getPlayerName(), player.getPlayerWallet()));
     }
   }
-  
+
   public void clearHands(List<Player> playerList) {
     for (Player player : playerList) {
       player.newHand();
@@ -147,5 +152,21 @@ public class Game {
       sc.nextLine();
     }
     return sc.nextInt();
+  }
+
+  public boolean continuePlaying(Scanner sc) {
+    System.out.println("Continue playing? [Y/N]");
+
+    while (!sc.hasNext("Y") && !sc.hasNext("N")) {
+      System.out.println("Continue playing? [Y/N]");
+      sc.nextLine();
+      if (sc.hasNext("Y")) {
+        return true;
+      } else if (sc.hasNext("N")) {
+        System.out.println("Game has ended");
+        return false;
+      } 
+    }
+    return false;
   }
 }
